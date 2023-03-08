@@ -159,6 +159,15 @@ public function get_all_pays_list($pays) {
             return $r->fetchAll(PDO::FETCH_OBJ) ;
 
         }  
+
+        public function get_all_editeur_list($editeur) {
+
+            $r = $this->bd->prepare("SELECT * FROM livre WHERE Editeur = '$editeur' " ) ;
+            $r->execute() ;
+
+            return $r->fetchAll(PDO::FETCH_OBJ) ;
+
+        } 
         // COMMANDE
         // fonction qui récupère toute les commandes
         public function get_all_commande() {

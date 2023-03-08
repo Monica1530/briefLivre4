@@ -1,36 +1,10 @@
-Résultat de votre recherche :
-<br/>
-
-
-<table class='table table-bordered table-responsive-md bg_table'>
-	<thead>
-		<tr>
-			<th>ISBN</th>
-			<th>Titre</th>
-			<th>Thème</th>
-			<th>Nombre de page</th>
-			<th>Format</th>
-			<th>Auteur</th>
-			<th>Editeur</th>
-			<th>Année d'édition</th>
-			<th>Prix</th>
-			<th>Langue</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php foreach ($livres as $l):?>
-			<tr>
-				<td> <?=$l->ISBN?> </td>
-				<td> <?=$l->Titre?> </td>
-				<td> <?=$l->Theme?> </td>
-				<td> <?=$l->Nb_pages?> </td>
-				<td> <?=$l->Format?> </td>
-				<td> <?=$l->NomAuteur?> <?=$l->PrenomAuteur?></td>
-				<td> <?=$l->Editeur?> </td>
-				<td> <?=$l->AnneeEdition?> </td>
-				<td> <?=$l->Prix?> </td>
-				<td> <?=$l->Langue?> </td>
-			</tr>
+<form action="?controller=livre&action=all_editeur_list" method="POST">
+			<legend>Recherche un livre par son editeur</legend>
+			<select name="e">
+		<?php foreach ($editeur as $e):?>
+			<option value="<?= $e->Editeur ?>"><?= $e->Editeur ?></option>
 		<?php endforeach; ?>
-	</tbody>
-</table>
+		</select>
+		<input type="submit" value="Envoyer" />
+</form>
+	
