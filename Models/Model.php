@@ -172,16 +172,51 @@ public function get_all_pays_list($pays) {
         // fonction qui récupère toute les commandes
         public function get_all_commande() {
 
-            $r = $this->bd->prepare("SELECT * FROM commande " ) ;
+            $r = $this->bd->prepare("SELECT livre.ISBN, livre.Titre, livre.NomAuteur, livre.PrenomAuteur, fournisseur.Raison_sociale, 
+            commande.Date_achat, commande.Prix_achat, commande.Nbr_exemplaires 
+            FROM commande INNER JOIN livre ON livre.id = commande.Id_livre INNER JOIN fournisseur 
+            ON fournisseur.Id_fournisseur = commande.id_fournisseur " ) ;
             $r->execute() ;
 
             return $r->fetchAll(PDO::FETCH_OBJ) ;
 
         }  
-//! récupère les editeurs, rédiger les erreurs 
+ 
 public function get_all_cediteur() {
 
-    $r = $this->bd->prepare("SELECT * FROM commande " ) ;
+    $r = $this->bd->prepare("SELECT * FROM livre " ) ;
+    $r->execute() ;
+
+    return $r->fetchAll(PDO::FETCH_OBJ) ;
+
+}  
+
+public function get_all_cediteur_list($id) {
+
+    $r = $this->bd->prepare("SELECT * FROM commande 
+    INNER JOIN livre ON livre.id = commande.Id_livre 
+    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
+    WHERE commande.Id_livre = $id" ) ;
+    $r->execute() ;
+
+    return $r->fetchAll(PDO::FETCH_OBJ) ;
+
+}  
+public function get_all_cfournisseur() {
+
+    $r = $this->bd->prepare("SELECT * FROM fournisseur" ) ;
+    $r->execute() ;
+
+    return $r->fetchAll(PDO::FETCH_OBJ) ;
+
+}  
+
+public function get_all_cfournisseur_list($id) {
+
+    $r = $this->bd->prepare("SELECT * FROM commande 
+    INNER JOIN livre ON livre.id = commande.Id_livre 
+    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
+    WHERE commande.id_fournisseur = $id " ) ;
     $r->execute() ;
 
     return $r->fetchAll(PDO::FETCH_OBJ) ;
@@ -195,10 +230,12 @@ public function get_all_date() {
     return $r->fetchAll(PDO::FETCH_OBJ) ;
 
 }  
-//! à corriger
-public function get_all_cfournisseur() {
+public function get_all_date_list($Id_livre) {
 
-    $r = $this->bd->prepare("SELECT * FROM commande " ) ;
+    $r = $this->bd->prepare("SELECT * FROM commande 
+    INNER JOIN livre ON livre.id = commande.Id_livre 
+    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
+    WHERE commande.Date_achat = $Id_livre  " ) ;
     $r->execute() ;
 
     return $r->fetchAll(PDO::FETCH_OBJ) ;
@@ -206,4 +243,7 @@ public function get_all_cfournisseur() {
 }  
 
 
-    }   // Fin de la Classe
+
+
+    }   
+    // Fin de la Classe

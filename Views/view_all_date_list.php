@@ -1,4 +1,4 @@
-Résultat de votre recherche :
+Résultat des commandes par date :
 <br/>
 
 
@@ -16,16 +16,16 @@ Résultat de votre recherche :
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($commande as $c):?>
+		<?php foreach ($date_list as $d):?>
 			<tr>
-				<td> <?=$c->ISBN?> </td>
-				<td> <?=$c->Titre?> </td>
-				<td> <?=$c->NomAuteur?> </td>
-				<td> <?=$c->PrenomAuteur?> </td>
-				<td> <?=$c->Raison_sociale?> </td>
-				<td> <?=$c->Date_achat?> </td>
-				<td> <?=$c->Prix_achat?> </td>
-				<td> <?=$c->Nbr_exemplaires?> </td>
+				<td> <?=$d->ISBN?> </td>
+                <td> <?=$d->Titre?> </td>
+				<td> <?=$d->NomAuteur?> </td>
+				<td> <?=$d->PrenomAuteur?> </td>
+				<td> <?=$d->Raison_sociale?> </td>
+				<td> <?=$d->Date_achat?> </td>
+				<td> <?=$d->Prix_achat?> </td>
+				<td> <?=$d->Nbr_exemplaires?> </td>
 			</tr>
 		<?php endforeach; ?>
 	</tbody>
