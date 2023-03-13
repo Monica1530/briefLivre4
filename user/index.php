@@ -19,12 +19,12 @@
 	<?php
 	require_once 'Controllers/Controller.php';
 	require_once 'Models/Model.php';
-	// require_once 'Utils/header.php';
+	require_once 'Utils/header.php';
 // on fait un echo pour vérifier vers quoi pointent le controller et l'action
 echo "Controller : ". $_GET['controller']."<br>";
 echo "action : ". $_GET['action']. "<br>";
 
-	$controllers=["home","livre","fournisseur","commande", "inscription", "login"];
+	$controllers=["home","livre","fournisseur","commande"];
 	$controller_default="home";
 
 	if (isset($_GET['controller']) and in_array($_GET['controller'],$controllers))
@@ -50,7 +50,7 @@ echo "action : ". $_GET['action']. "<br>";
 	}
 
 
-
+	require_once 'Utils/footer.php';
 
 	 ?>
 </body>

@@ -54,10 +54,12 @@ class Controller_livre extends Controller
             $this->render("all_editeur",$data);
         }
 
-        public function action_inserer_livre()
+        public function action_all_editeur_list()
         {
-           
-            $this->render("inserer_livre");
+            $editeur = $_POST['e'];
+            $m=Model::get_model();
+            $data=["editeur_list"=>$m->get_all_editeur_list($editeur)];
+            $this->render("all_editeur_list",$data);
         }
 }
 

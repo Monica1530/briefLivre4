@@ -54,11 +54,35 @@ class Controller_livre extends Controller
             $this->render("all_editeur",$data);
         }
 
-        public function action_inserer_livre()
+        public function action_all_editeur_list()
         {
-           
-            $this->render("inserer_livre");
+            $editeur = $_POST['e'];
+            $m=Model::get_model();
+            $data=["editeur_list"=>$m->get_all_editeur_list($editeur)];
+            $this->render("all_editeur_list",$data);
         }
+
+
+
+    public function action_inserer_livre(){
+
+
+            $this->render("inserer_livre");
+
+    }
+    public function action_traitement_inserer_livre(){
+        $m = Model::get_model();
+        $m->get_traitement_inserer_livre();
+        // $data = ["add_livre" => $m->get_add_livre(),"position" => 1];
+        $data = ["livres" => $m->get_all_livres()];
+        $this->render("all_livres", $data);
+        
+
 }
+}
+// header("Location:?controller=home&action=home");
+
+
+
 
 ?>

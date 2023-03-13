@@ -33,217 +33,47 @@
         }
 
 
-
-
-
-// je crée une autre fonction pour avoir accès à fournisseur
-
-public function get_all_fournisseur() {
-
-    $r = $this->bd->prepare("SELECT * FROM fournisseur" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-// je crée une fonction pour afficher les fournisseurs par raison sociale 
-
-public function get_all_rsociale() {
-
-    $r = $this->bd->prepare("SELECT DISTINCT Raison_sociale FROM fournisseur" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-
-public function get_all_rsociale_list() {
-    $raisonsociale = $_POST['rs'];
-    $r = $this->bd->prepare("SELECT * FROM fournisseur WHERE Raison_sociale= '$raisonsociale'" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-
-// fonction pour afficher les fournisseurs par leur localité
-
-public function get_all_localite() {
-
-    $r = $this->bd->prepare("SELECT Localite FROM fournisseur" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-
-public function get_all_localite_list($localite) {
-     
-    $r = $this->bd->prepare("SELECT * FROM fournisseur WHERE Localite = '$localite'" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-// fonction pour afficher les fournisseurs par leur pays
-
-public function get_all_pays() {
-
-    $r = $this->bd->prepare("SELECT Pays FROM fournisseur" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-
-public function get_all_pays_list($pays) {
-
-    $r = $this->bd->prepare("SELECT * FROM fournisseur WHERE Pays = '$pays'" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}
-
-        public function get_all_livres() {
-
-            $r = $this->bd->prepare("SELECT * FROM livre order by Titre" ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }
-        // fonction qui récupère les titres
-
-        public function get_all_titre() {
-
-            $r = $this->bd->prepare("SELECT Titre FROM livre " ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }  
-
-        public function get_all_titre_list($titre) {
-
-            $r = $this->bd->prepare("SELECT * FROM livre WHERE Titre = '$titre'" ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        } 
-        // fonction qui récupère les auteurs
-        public function get_all_auteur() {
-
-            $r = $this->bd->prepare("SELECT NomAuteur, PrenomAuteur FROM livre " ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }  
-
-        public function get_all_auteur_list($auteur) {
-
-            $r = $this->bd->prepare("SELECT * FROM livre WHERE NomAuteur = '$auteur'" ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }  
-        // fonction qui récupère les éditeurs
-        public function get_all_editeur() {
-
-            $r = $this->bd->prepare("SELECT Editeur FROM livre " ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }  
-
-        public function get_all_editeur_list($editeur) {
-
-            $r = $this->bd->prepare("SELECT * FROM livre WHERE Editeur = '$editeur' " ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        } 
-        // COMMANDE
-        // fonction qui récupère toute les commandes
-        public function get_all_commande() {
-
-            $r = $this->bd->prepare("SELECT livre.ISBN, livre.Titre, livre.NomAuteur, livre.PrenomAuteur, fournisseur.Raison_sociale, 
-            commande.Date_achat, commande.Prix_achat, commande.Nbr_exemplaires 
-            FROM commande INNER JOIN livre ON livre.id = commande.Id_livre INNER JOIN fournisseur 
-            ON fournisseur.Id_fournisseur = commande.id_fournisseur " ) ;
-            $r->execute() ;
-
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-        }  
- 
-public function get_all_cediteur() {
-
-    $r = $this->bd->prepare("SELECT * FROM livre " ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-
-public function get_all_cediteur_list($id) {
-
-    $r = $this->bd->prepare("SELECT * FROM commande 
-    INNER JOIN livre ON livre.id = commande.Id_livre 
-    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
-    WHERE commande.Id_livre = $id" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-public function get_all_cfournisseur() {
-
-    $r = $this->bd->prepare("SELECT * FROM fournisseur" ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-
-public function get_all_cfournisseur_list($id) {
-
-    $r = $this->bd->prepare("SELECT * FROM commande 
-    INNER JOIN livre ON livre.id = commande.Id_livre 
-    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
-    WHERE commande.id_fournisseur = $id " ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-public function get_all_date() {
-
-    $r = $this->bd->prepare("SELECT Date_achat FROM commande " ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-public function get_all_date_list($Id_livre) {
-
-    $r = $this->bd->prepare("SELECT * FROM commande 
-    INNER JOIN livre ON livre.id = commande.Id_livre 
-    INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
-    WHERE commande.Date_achat = $Id_livre  " ) ;
-    $r->execute() ;
-
-    return $r->fetchAll(PDO::FETCH_OBJ) ;
-
-}  
-
-
-
-
-    }   
+//fonction pour l'inscription
+public function get_inscription(){
+    // Je récupère les données du formulaire d'inscription
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $ident = $_POST['ident'];
+    $mdp = $_POST['pass'];
+    $mpd2 = $_POST['pass2'];
+
+    // je vérifie si les informations sont captées
+    echo $nom . " " . $prenom . " " . $ident . " " . $mdp . " " . $mpd2;
+
+    // if ($mdp == $mdp2) {
+    //     echo "mot de pass identique";
+    // } else {
+    //     echo "Le mot de pass ne correspond pas";
+    // }
+    // j'insère les données du formulaire d'inscription dans la base de donnée 
+    $requete = $this->bd->prepare("INSERT INTO user( Nom, Prenom, Identifiant, Mdp) VALUES (:nom,:prenom,:identifiant,:mdp)");
+    
+        $requete->bindValue(':nom', $nom);
+        $requete->bindValue(':prenom', $prenom);
+        $requete->bindValue(':identifiant', $ident);
+        $requete->bindValue(':mdp', $mdp);
+        $requete->execute();
+
+    //     public function get_sign_up_user()
+    // {
+    //     $nom = $_POST['nom'];
+    //     $prenom = $_POST['prenom'];
+    //     $email = $_POST['email'];
+    //     $password = $_POST['password'];
+    //     $r = $this->bd->prepare("INSERT INTO users(nom, prenom, mail, password) 
+    //     VALUES (:nom,:prenom,:email,:pass)");
+    //     $r->bindParam(':nom', $nom);
+    //     $r->bindParam(':prenom', $prenom);
+    //     $r->bindParam(':email', $email);
+    //     $r->bindParam(':pass', $password);
+    //     $r->execute();
+    // }
+    }
+
+}   
     // Fin de la Classe
