@@ -10,7 +10,8 @@ Résultat de votre recherche :
 			<th>Thème</th>
 			<th>Nombre de page</th>
 			<th>Format</th>
-			<th>Auteur</th>
+			<th>Nom Auteur</th>
+			<th>Prenom Auteur</th>
 			<th>Editeur</th>
 			<th>Année d'édition</th>
 			<th>Prix</th>
@@ -20,17 +21,23 @@ Résultat de votre recherche :
 	<tbody>
 		<?php foreach ($livres as $l):?>
 			<tr>
+			
 				<td> <?=$l->ISBN?> </td>
 				<td> <?=$l->Titre?> </td>
 				<td> <?=$l->Theme?> </td>
 				<td> <?=$l->Nb_pages?> </td>
 				<td> <?=$l->Format?> </td>
-				<td> <?=$l->NomAuteur?> <?=$l->PrenomAuteur?></td>
+				<td> <?=$l->NomAuteur?> </td>
+				<td><?=$l->PrenomAuteur?></td>
 				<td> <?=$l->Editeur?> </td>
 				<td> <?=$l->AnneeEdition?> </td>
 				<td> <?=$l->Prix?> </td>
 				<td> <?=$l->Langue?> </td>
-			</tr>
-		<?php endforeach; ?>
+				<td><a href= "?controller=livre&action=livre_update&id=<?= $l->id ?>"><i class="fa-solid fa-pen"></i></a></td>
+           
+            ?
+			<td><a href= "?controller=livre&action=livre_delete&id=<?= $l->id ?>"><i class="fa-solid fa-trash"></i></a></td></tr>
+			
+		 <?php endforeach; ?>
 	</tbody>
 </table>

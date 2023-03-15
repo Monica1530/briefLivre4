@@ -109,9 +109,9 @@ public function get_all_pays_list($pays) {
 
             $r = $this->bd->prepare("SELECT * FROM livre order by Titre" ) ;
             $r->execute() ;
+            
 
             return $r->fetchAll(PDO::FETCH_OBJ) ;
-
         }
         // fonction qui récupère les titres
 
@@ -168,6 +168,45 @@ public function get_all_pays_list($pays) {
             return $r->fetchAll(PDO::FETCH_OBJ) ;
 
         } 
+
+
+// fonction pour supprimer des livres
+        public function get_livre_delete($id) {
+
+        
+            $r = $this->bd->prepare('DELETE FROM livre WHERE id = ?');
+            $r->execute(array($id));
+       
+            
+            return $r->fetchAll(PDO::FETCH_OBJ) ;
+            }
+
+// fonction pour mettre à jour un livre
+            public function get_livre_update($id) {
+
+                
+            $r = $this->bd->prepare("SELECT * FROM livre WHERE id = '$id'");
+            $r->execute();
+
+            
+            return $r->fetchAll(PDO::FETCH_OBJ) ;
+            }
+
+            
+            public function get_traitement_livre_update($id) {
+
+                
+                $r = $this->bd->prepare(' UPDATE `livre` SET `id`='[value-1]',`ISBN`='[value-2]',`Titre`='[value-3]',`Theme`='[value-4]',`Nb_pages`='[value-5]',`Format`='[value-6]',`NomAuteur`='[value-7]',`PrenomAuteur`='[value-8]',`Editeur`='[value-9]',`AnneeEdition`='[value-10]',`Prix`='[value-11]',`Langue`='[value-12]'WHERE id = ?');
+                $r->execute($id);
+    
+                
+                return $r->fetchAll(PDO::FETCH_OBJ) ;
+                }
+
+    
+    
+
+
         // COMMANDE
         // fonction qui récupère toute les commandes
         public function get_all_commande() {
@@ -256,25 +295,23 @@ public function get_traitement_inserer_livre() {
     $prix = $_POST['prix'];
     $langue = $_POST['langue'];
     $requete = $this->bd->prepare("INSERT INTO `livre`(`ISBN`, `Titre`, `Theme`, `Nb_pages`, `Format`, `NomAuteur`, `PrenomAuteur`, `Editeur`, `AnneeEdition`, `Prix`, `Langue`) 
-    VALUES (':isbn','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]')") ;
+    VALUES (:isbn,:titre,:theme,:nbPages,:format,:nomAuteur,:prenomAuteur,:editeur,:anneeEdition,:prix, :langue)") ;
     
     
-    $requete->bindValue(':isbn', $isbn);
-   $requete->bindValue(':titre',$titre);
-   $requete->bindValue(':theme', $theme);
-   $requete->bindValue(':nbpages', $nbPages);
-   $requete->bindValue(':format', $format);
-   $requete->bindValue(':nomauteur', $nomAuteur);
-   $requete->bindValue(':prenomauteur', $prenomAuteur);
-   $requete->bindValue(':editeur', $editeur);
-   $requete->bindValue(':anneeedition', $anneeEdition);
-   $requete->bindValue(':prix', $prix);
-   $requete->bindValue(':langue', $langue);
+   $requete->bindParam(':isbn', $isbn);
+   $requete->bindParam(':titre',$titre);
+   $requete->bindParam(':theme', $theme);
+   $requete->bindParam(':nbPages', $nbPages);
+   $requete->bindParam(':format', $format);
+   $requete->bindParam(':nomAuteur', $nomAuteur);
+   $requete->bindParam(':prenomAuteur', $prenomAuteur);
+   $requete->bindParam(':editeur', $editeur);
+   $requete->bindParam(':anneeEdition', $anneeEdition);
+   $requete->bindParam(':prix', $prix);
+   $requete->bindParam(':langue', $langue);
    
-    $requete->execute() ;
-
-    return $requete->fetchAll(PDO::FETCH_OBJ) ;
-
-}
+   $requete->execute() ;
+   }
 }   
+// return $requete->fetchAll(PDO::FETCH_OBJ) ;
     // Fin de la Classe

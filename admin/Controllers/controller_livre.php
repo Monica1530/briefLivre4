@@ -73,12 +73,44 @@ class Controller_livre extends Controller
     public function action_traitement_inserer_livre(){
         $m = Model::get_model();
         $m->get_traitement_inserer_livre();
-        // $data = ["add_livre" => $m->get_add_livre(),"position" => 1];
         $data = ["livres" => $m->get_all_livres()];
         $this->render("all_livres", $data);
         
 
 }
+// Effacer un livre
+public function action_livre_delete(){
+    $id = $_GET['id'];
+    $m = Model::get_model();
+    
+     $data = ["livres" => $m->get_livre_delete($id)];
+    $this->render("home");
+    
+}
+
+// Mettre à jour un livre
+//livre_update
+
+public function action_livre_update(){
+    
+    $id = $_GET['id'];
+    $m = Model::get_model();
+    
+     $data = ["book" => $m->get_livre_update($id)];
+    $this->render("book", $data);
+    
+}
+
+public function action_traitement_livre_update(){
+    $id = $_GET['id'];
+    $m = Model::get_model();
+    
+     $data = ["livres" => $m->get_livre_update($id)];
+    $this->render("all_livres", $data);
+    
+}
+
+
 }
 // header("Location:?controller=home&action=home");
 
