@@ -27,6 +27,6 @@ Résultat des commandes par date :
 				<td> <?=$d->Prix_achat?> </td>
 				<td> <?=$d->Nbr_exemplaires?> </td>
 			</tr>
-		<?php endforeach; ?>
+		<?php endforeach;  ?>
 	</tbody>
 </table>

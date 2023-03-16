@@ -41,6 +41,7 @@
           			<a class="dropdown-item" href="?controller=commande&action=all_cediteur">Par éditeur</a>
           			<a class="dropdown-item" href="?controller=commande&action=all_cfournisseur">Par fournisseur</a>
           			<a class="dropdown-item" href="?controller=commande&action=all_date">Par date</a>
+					  <a class="dropdown-item" href="?controller=commande&action=inserer_commande">Inserer commande</a>
         		</div>
       		</li>
 			<li>

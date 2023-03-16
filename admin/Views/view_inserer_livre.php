@@ -13,10 +13,10 @@
 
     <img src="image\livre.png">
     <div class="formulaire">
-        <fieldset>
-
-            <h1>Ajouter un livre</h1>
-            <form method="POST" action="?controller=livre&action=traitement_inserer_livre">
+        
+        <h1>Ajouter un livre</h1>
+        <form method="POST" action="?controller=livre&action=traitement_inserer_livre">
+                <fieldset>
                 <p>
                     <label for="number">ISBN </label>
                     <input type="integer" size="20" id="number" name="number" required>
@@ -65,8 +65,8 @@
                 <div class="button">
                     <input type="submit" value="ajouter">
                 </div>
-            </form>
             </fieldselt>
+            </form>
 
 
 

@@ -1,5 +1,5 @@
 <h1>Modifier un livre</h1>
-<form method="POST" action="?controller=livre&action=livre_update&id=<?=$id?>">
+<form method="POST" action="?controller=livre&action=traitement_livre_update&id=<?=$book->id?>">
 
  
         <div class="formulaire">

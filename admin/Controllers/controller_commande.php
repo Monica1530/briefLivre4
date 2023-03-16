@@ -48,6 +48,7 @@ class Controller_commande extends Controller
 
         public function action_all_date()
         {
+            // $date = $_POST['d'];
             $m=Model::get_model();
             $data=["date"=>$m->get_all_date()];
             $this->render("all_date",$data);
@@ -60,4 +61,19 @@ class Controller_commande extends Controller
             $data=["date_list"=>$m->get_all_date_list($date)];
             $this->render("all_date_list",$data);
         }
+
+        public function action_inserer_commande(){
+            $id = $_GET['titre_livre'];
+            $data = ["livre" => $m->get_all_livres()];
+            $this->render("inserer_commande");
+
+    }
+    public function action_traitement_inserer_commande(){
+        $m = Model::get_model();
+        $m->get_traitement_inserer_commande();
+        $data = ["commande" => $m->get_all_commande()];
+        $this->render("titre_livre", $data);
+        
+
+}
     }

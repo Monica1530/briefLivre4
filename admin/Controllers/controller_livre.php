@@ -97,7 +97,7 @@ public function action_livre_update(){
     $m = Model::get_model();
     
      $data = ["book" => $m->get_livre_update($id)];
-    $this->render("book", $data);
+    $this->render("livre_update", $data);
     
 }
 
@@ -105,8 +105,8 @@ public function action_traitement_livre_update(){
     $id = $_GET['id'];
     $m = Model::get_model();
     
-     $data = ["livres" => $m->get_livre_update($id)];
-    $this->render("all_livres", $data);
+     $data = ["book" => $m->get_traitement_livre_update($id)];
+    $this->render("home");
     
 }
 

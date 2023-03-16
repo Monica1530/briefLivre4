@@ -183,23 +183,33 @@ public function get_all_pays_list($pays) {
 
 // fonction pour mettre à jour un livre
             public function get_livre_update($id) {
-
+var_dump($id);
                 
-            $r = $this->bd->prepare("SELECT * FROM livre WHERE id = '$id'");
+            $r = $this->bd->prepare("SELECT * FROM livre WHERE id = $id");
             $r->execute();
 
             
-            return $r->fetchAll(PDO::FETCH_OBJ) ;
+            return $r->fetch(PDO::FETCH_OBJ) ;
             }
 
             
             public function get_traitement_livre_update($id) {
-
-                
-                $r = $this->bd->prepare(' UPDATE `livre` SET `id`='[value-1]',`ISBN`='[value-2]',`Titre`='[value-3]',`Theme`='[value-4]',`Nb_pages`='[value-5]',`Format`='[value-6]',`NomAuteur`='[value-7]',`PrenomAuteur`='[value-8]',`Editeur`='[value-9]',`AnneeEdition`='[value-10]',`Prix`='[value-11]',`Langue`='[value-12]'WHERE id = ?');
-                $r->execute($id);
-    
-                
+                $isbn = $_POST['number'];
+                $titre = $_POST['titre'];
+                $theme = $_POST['theme'];
+                $nbPages = $_POST['pages'];
+                $format = $_POST['format'];
+                $nomAuteur = $_POST['nom'];
+                $prenomAuteur = $_POST['prenom'];
+                $editeur = $_POST['editeur'];
+                $anneeEdition = $_POST['annee'];
+                $prix = $_POST['prix'];
+                $langue = $_POST['langue'];
+        
+       
+                $r = $this->bd->prepare(" UPDATE livre SET ISBN=$isbn, Titre='$titre', Theme='$theme', Nb_pages=$nbPages, Format='$format', NomAuteur='$nomAuteur', PrenomAuteur='$prenomAuteur', Editeur='$editeur', AnneeEdition=$anneeEdition, Prix=$prix, Langue='$langue' WHERE id = :id");
+                $r->bindvalue(':id',$id);
+                $r->execute();
                 return $r->fetchAll(PDO::FETCH_OBJ) ;
                 }
 
@@ -269,17 +279,39 @@ public function get_all_date() {
     return $r->fetchAll(PDO::FETCH_OBJ) ;
 
 }  
-public function get_all_date_list($Id_livre) {
-
+public function get_all_date_list($date) {
+    $date = $_POST['d'];
+    var_dump($date);
     $r = $this->bd->prepare("SELECT * FROM commande 
     INNER JOIN livre ON livre.id = commande.Id_livre 
     INNER JOIN fournisseur ON fournisseur.Id_fournisseur = commande.id_fournisseur 
-    WHERE commande.Date_achat = $Id_livre  " ) ;
+    WHERE commande.Date_achat = '$date' " ) ;
     $r->execute() ;
 
     return $r->fetchAll(PDO::FETCH_OBJ) ;
 
 }  
+
+public function get_traitement_inserer_commande() {
+$id = $_GET['l'];
+    
+    $titre = $_POST['titre'];
+    $raisonSociale = $_POST['raison_sociale'];
+    $dateCommande = $_POST['date_commande'];
+    $prix = $_POST['prix'];
+    $quantite = $_POST['quantite'];
+    
+    $requete = $this->bd->prepare("INSERT INTO `commande`(`Titre`, `Raison_sociale`, `Date_achat`, `Prix` `Nbr_exemplaires` WHERE Id_livre =$id) 
+    VALUES (:titre,:raison_sociale,:date_commande,:prix,:quantite)") ;
+    
+    $requete->bindParam(':titre', $titre);
+    $requete->bindParam(':raison_sociale',$raisonSociale);
+    $requete->bindParam(':date_commande', $dateCommande);
+    $requete->bindParam(':prix', $prix);
+    $requete->bindParam(':quantite', $quantite);
+  
+    $requete->execute() ;
+   }
 
 public function get_traitement_inserer_livre() {
 
