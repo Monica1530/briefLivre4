@@ -74,6 +74,19 @@ public function get_inscription(){
     //     $r->execute();
     // }
     }
+public function get_login(){
+    $login = $_POST['login'];
+    $pass = $_POST['pass'];
+var_dump($login, $pass);
+    $requete = $this->bd->prepare("SELECT * FROM user WHERE Identifiant= '$login' AND Mdp = '$pass' ");
+ 
+    // $requete->bindValue(':login', $login);
+    // $requete->bindValue(':pass', $ass);
+    
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_OBJ) ;
+
+}
 
 }   
     // Fin de la Classe

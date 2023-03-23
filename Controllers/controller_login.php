@@ -8,12 +8,10 @@ class Controller_login extends Controller
 
 	public function action_login()
 	{
-		if ($_SESSION ["role"] === 1){
-		header('Location: admin/?controller=home&action=home');
+		$m=Model::get_model();
+		$data=["login"=>$m->get_login()];
+		$this->render("login",$data);
 	}
-	else {
-			header('Location: user/?controller=home&action=home');
-			
-		}
-	}
+
+	
 }

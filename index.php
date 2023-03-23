@@ -21,8 +21,7 @@
 	require_once 'Models/Model.php';
 	// require_once 'Utils/header.php';
 // on fait un echo pour vérifier vers quoi pointent le controller et l'action
-echo "Controller : ". $_GET['controller']."<br>";
-echo "action : ". $_GET['action']. "<br>";
+
 
 	$controllers=["home","livre","fournisseur","commande", "inscription", "login"];
 	$controller_default="home";

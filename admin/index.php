@@ -22,8 +22,7 @@
 	require_once 'Models/Model.php';
 	require_once 'Utils/header.php';
 // on fait un echo pour vérifier vers quoi pointent le controller et l'action
-echo "Controller : ". $_GET['controller']."<br>";
-echo "action : ". $_GET['action']. "<br>";
+
 
 	$controllers=["home","livre","fournisseur","commande"];
 	$controller_default="home";
@@ -39,6 +38,7 @@ echo "action : ". $_GET['action']. "<br>";
 
 	$nom_classe="Controller_".$nom_controller;
 	$nom_fichier="Controllers/".$nom_classe.".php";
+	// var_dump($nom_fichier);
 
 	if (file_exists($nom_fichier))
 	{
